@@ -13,7 +13,6 @@ class UsersListSerializer(serializers.ModelSerializer):
                   "last_action",
                   )
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -22,8 +21,11 @@ class UserSerializer(serializers.ModelSerializer):
                   "age",
                   "image",
                   'password',
-
+                "last_action",
+                "is_online",
                   )
+
+        read_only_fields=('last_action','is_online',)
 
     def create(self, validated_data):
         password = validated_data.pop('password')

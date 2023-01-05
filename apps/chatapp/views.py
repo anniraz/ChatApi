@@ -4,11 +4,28 @@ from rest_framework import generics,permissions
 from rest_framework.response import Response
 
 from apps.user.models import User                                
-from apps.chatapp.models import Message
-from apps.chatapp.serializers import MessageSerializer
+from apps.chatapp.models import Message,ChatRoom
+from apps.chatapp.serializers import MessageSerializer,ChatRoomSerializer
 from apps.chatapp.permissions import IsOwner
 
-class SendMessageApiView(generics.ListCreateAPIView):
+
+
+
+class  ChatRoomApiView(generics.ListCreateAPIView):
+    queryset=ChatRoom.objects.all()
+    serializer_class=ChatRoomSerializer
+    permission_classes=[permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        return serializer.save(owner=self.request.user)
+
+
+
+
+
+
+
+class SendMessagewwwwwwwwwwwwApiView(generics.ListCreateAPIView):
     queryset=Message.objects.all()
     serializer_class=MessageSerializer
     permission_classes=[permissions.IsAuthenticated]
@@ -29,7 +46,7 @@ class SendMessageApiView(generics.ListCreateAPIView):
         return serializer.save(sender=self.request.user,receiver=receiver)
 
 
-class MessagesApiView(generics.RetrieveUpdateDestroyAPIView):
+class MessagesApqqqqqqqqiView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Message.objects.all()
     serializer_class=MessageSerializer
     permission_classes=[IsOwner]

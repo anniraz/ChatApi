@@ -18,7 +18,6 @@ class LastActivity:
                 user.save()
         
         assert hasattr(request, 'user')
-        print('=============================',request.user)
         if request.user.is_authenticated:
             user = User.objects.get(id=request.user.id)
             user.last_action = timezone.now()
