@@ -7,7 +7,10 @@ class UsersListSerializer(serializers.ModelSerializer):
         model = User
         fields = ("id",
                   "username",
+                  "email",
+                  "phone_number",
                   "age",
+                  "bio",
                   "image",
                   "is_online",
                   "last_action",
@@ -18,7 +21,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ("id",
                   "username",
+                  "email",
+                  "phone_number",
                   "age",
+                  "bio",
                   "image",
                   'password',
                 "last_action",
