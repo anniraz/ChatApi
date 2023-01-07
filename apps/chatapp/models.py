@@ -4,12 +4,17 @@ from apps.user.models import User
 
 
 class ChatRoom(models.Model):
+      name_reciever=models.CharField(max_length=255,null=True,blank=True)
+      name_owner=models.CharField(max_length=255,null=True,blank=True)
       receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
-      name=models.CharField(max_length=255,null=True,blank=True)
       owner= models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')        
 
       def __str__(self) -> str:
-           return f'{self.name}'
+           return f'reciever:{self.name_reciever} sender:{self.name_owner}'
+      
+      class Meta:
+            unique_together=(('receiver','owner',),)
+
 
 class Message(models.Model):
      chat_room=models.ForeignKey(ChatRoom,on_delete=models.CASCADE)
