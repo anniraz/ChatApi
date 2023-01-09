@@ -1,9 +1,10 @@
 from django.utils import timezone
-
-from apps.user.models import User
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from apps.user.models import User
+
 class UserStatus:
+
     def __init__(self, get_response):
         self.get_response = get_response
 

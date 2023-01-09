@@ -64,7 +64,7 @@ class SendMessageApiView(generics.ListCreateAPIView):
     serializer_class=MessageSerializer
     permission_classes=[PersonalMessages]
 
-    def get(self,pk):
+    def get(self,request,pk):
         chat_room=ChatRoom.objects.get(id=pk)
         messages=Message.objects.filter(chat_room=chat_room)
         serializer=MessageSerializer(messages,many=True)
@@ -73,6 +73,8 @@ class SendMessageApiView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         pk = self.kwargs.get('pk')
         return serializer.save(chat_room=ChatRoom.objects.get(id=pk))
+
+
 
 
 
