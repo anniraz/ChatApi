@@ -4,7 +4,7 @@ from rest_framework import generics,permissions
 from rest_framework.response import Response
 
 from apps.user.models import User  
-from apps.user.serializers import UsersListSerializer                              
+from apps.user.serializers import UsersListSerializer                             
 from apps.chatapp.models import Message,ChatRoom
 from apps.chatapp.serializers import MessageSerializer,ChatRoomSerializer,ContactSenderSerializer,ContactReceiverSerializer
 from apps.chatapp.permissions import IsChatOwners,PersonalMessages,IsMessageOwner
@@ -64,7 +64,7 @@ class SendMessageApiView(generics.ListCreateAPIView):
     serializer_class=MessageSerializer
     permission_classes=[PersonalMessages]
 
-    def get(self,request,pk):
+    def get(self,pk):
         chat_room=ChatRoom.objects.get(id=pk)
         messages=Message.objects.filter(chat_room=chat_room)
         serializer=MessageSerializer(messages,many=True)
