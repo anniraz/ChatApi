@@ -8,6 +8,7 @@ from apps.user.serializers import UserSerializer
 class UserListCreateApiView(generics.ListCreateAPIView):
     queryset=User.objects.all()
     serializer_class=UserSerializer
+    permission_classes=[permissions.AllowAny]
 
 
 class UserDetailApiView(generics.RetrieveUpdateDestroyAPIView):

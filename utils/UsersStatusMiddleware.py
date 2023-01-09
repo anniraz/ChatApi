@@ -9,21 +9,23 @@ class UserStatus:
         self.get_response = get_response
 
     def __call__(self, request):
-        request_user = JWTAuthentication().authenticate(request)[0]
-
-
-        for user in User.objects.all():
-            if (timezone.now() - user.last_action) > timezone.timedelta(minutes=1):
-                user.is_online=False
-                user.save()
+        try:
+            request_user = JWTAuthentication().authenticate(request)[0]
+            for user in User.objects.all():
+                if (timezone.now() - user.last_action) > timezone.timedelta(minutes=1):
+                    user.is_online=False
+                    user.save()
         
-        if request_user:
-            user = User.objects.get(id=request_user.id)
-            user.is_online=True
-            user.last_action = timezone.now()
-            user.save()
+            if request_user:
+                user = User.objects.get(id=request_user.id)
+                user.is_online=True
+                user.last_action = timezone.now()
+                user.save()
+        except:
+            print()
 
         return self.get_response(request)
+
 
 
 

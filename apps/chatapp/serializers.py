@@ -20,13 +20,13 @@ class ContactSenderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatRoom
         fields = ['id','receiver','name_reciever','name_owner']
-        read_only_fields = ('owner','name_owner')
+        read_only_fields = ('owner','name_owner','receiver',)
 
 class ContactReceiverSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatRoom
         fields = ['id','receiver','name_reciever','name_owner']
-        read_only_fields = ('owner','name_reciever',)
+        read_only_fields = ('owner','name_reciever','receiver',)
 
 
 class MessageSerializer(serializers.ModelSerializer):
