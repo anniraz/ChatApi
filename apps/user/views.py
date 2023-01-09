@@ -24,6 +24,7 @@ class UserDetailApiView(generics.RetrieveUpdateDestroyAPIView):
         return [permission() for permission in permission_classes]
 
 
+
 class CurrentUserApiView(generics.RetrieveUpdateDestroyAPIView):
 
     '''current user '''
